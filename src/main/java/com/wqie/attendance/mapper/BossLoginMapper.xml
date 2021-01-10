@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqie.attendance.mapper.BossLoginMapper">
+  <resultMap id="BaseResultMap" type="com.wqie.attendance.model.BossLogin">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="EMPNO" jdbcType="VARCHAR" property="empno" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, EMPNO, PWD
+  </sql>
+  <select id="selectPwdByEmpno" parameterType="java.lang.String" resultType="java.lang.String">
+    select
+    PWD
+    from T_BOSSLOGIN
+    where EMPNO = #{empno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectCountIdByEmpno" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    COUNT(ID)
+    from T_BOSSLOGIN
+    where EMPNO = #{empno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_BOSSLOGIN
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_BOSSLOGIN
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.wqie.attendance.model.BossLogin">
+    insert into T_BOSSLOGIN (ID, EMPNO, PWD
+      )
+    values (#{id,jdbcType=NUMERIC}, #{empno,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqie.attendance.model.BossLogin">
+    insert into T_BOSSLOGIN
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="empno != null">
+        EMPNO,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="empno != null">
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqie.attendance.model.BossLogin">
+    update T_BOSSLOGIN
+    <set>
+      <if test="empno != null">
+        EMPNO = #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqie.attendance.model.BossLogin">
+    update T_BOSSLOGIN
+    set EMPNO = #{empno,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

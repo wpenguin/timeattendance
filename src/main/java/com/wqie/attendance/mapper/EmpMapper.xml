@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqie.attendance.mapper.EmpMapper">
+  <resultMap id="BaseResultMap" type="com.wqie.attendance.model.Emp">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="EMPNO" jdbcType="VARCHAR" property="empno" />
+    <result column="ENAME" jdbcType="VARCHAR" property="ename" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="JOB" jdbcType="VARCHAR" property="job" />
+    <result column="HIREDATE" jdbcType="TIMESTAMP" property="hiredate" />
+    <result column="DEPTNO" jdbcType="VARCHAR" property="deptno" />
+    <result column="SAL" jdbcType="NUMERIC" property="sal" />
+    <result column="COMM" jdbcType="NUMERIC" property="comm" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, EMPNO, ENAME, SEX, JOB, HIREDATE, DEPTNO, SAL, COMM
+  </sql>
+<!--  select * from t_emp where deptno='D34001' and job like '%经理';-->
+  <select id="selectMyDeptno" parameterType="java.lang.String" resultType="java.lang.String">
+    select
+    DEPTNO
+    from T_EMP
+    where EMPNO = #{empno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMyManager" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_EMP
+    where DEPTNO = #{deptno,jdbcType=VARCHAR}
+    and JOB like #{job,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMyInformation" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_EMP
+    where EMPNO = #{empno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_EMP
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_EMP
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.wqie.attendance.model.Emp">
+    insert into T_EMP (ID, EMPNO, ENAME, 
+      SEX, JOB, HIREDATE, 
+      DEPTNO, SAL, COMM)
+    values (#{id,jdbcType=NUMERIC}, #{empno,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{hiredate,jdbcType=TIMESTAMP}, 
+      #{deptno,jdbcType=VARCHAR}, #{sal,jdbcType=NUMERIC}, #{comm,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqie.attendance.model.Emp">
+    insert into T_EMP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="empno != null">
+        EMPNO,
+      </if>
+      <if test="ename != null">
+        ENAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="job != null">
+        JOB,
+      </if>
+      <if test="hiredate != null">
+        HIREDATE,
+      </if>
+      <if test="deptno != null">
+        DEPTNO,
+      </if>
+      <if test="sal != null">
+        SAL,
+      </if>
+      <if test="comm != null">
+        COMM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="empno != null">
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null">
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null">
+        #{hiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptno != null">
+        #{deptno,jdbcType=VARCHAR},
+      </if>
+      <if test="sal != null">
+        #{sal,jdbcType=NUMERIC},
+      </if>
+      <if test="comm != null">
+        #{comm,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqie.attendance.model.Emp">
+    update T_EMP
+    <set>
+      <if test="empno != null">
+        EMPNO = #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null">
+        ENAME = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null">
+        HIREDATE = #{hiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptno != null">
+        DEPTNO = #{deptno,jdbcType=VARCHAR},
+      </if>
+      <if test="sal != null">
+        SAL = #{sal,jdbcType=NUMERIC},
+      </if>
+      <if test="comm != null">
+        COMM = #{comm,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqie.attendance.model.Emp">
+    update T_EMP
+    set EMPNO = #{empno,jdbcType=VARCHAR},
+      ENAME = #{ename,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      HIREDATE = #{hiredate,jdbcType=TIMESTAMP},
+      DEPTNO = #{deptno,jdbcType=VARCHAR},
+      SAL = #{sal,jdbcType=NUMERIC},
+      COMM = #{comm,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

@@ -1,0 +1,263 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: url("/images/eindex.jpeg");
+    background-size: cover;
+}
+#box_0 table{
+    float: left;
+}
+#top{
+    width: 350px;
+    height: 50px;
+    border: 1px solid #000;
+    line-height: 50px;
+}
+#top input{
+    width: 60px;
+    margin-left: 40px;
+    text-align: center;
+}
+#top button{
+    width: 20px;
+    margin-left: 20px;
+}
+#rl{
+    width: 350px;
+    height: 350px;
+    border: 1px solid #000;
+    border-top: none;
+}
+#rl div{
+    width: 50px;
+    height: 50px;
+    float: left;
+    text-align: center;
+    line-height: 50px;
+}
+#mtop{
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+    left: 700px;
+    top: 300px;
+    z-index: 3;
+    color: white;
+    font-weight: bold;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    cursor: pointer;
+    color: red;
+}
+#mbuttom{
+    width: 1000px;
+    height: 700px;
+    margin: 20px auto;
+}
+#m_top{
+    width: 600px;
+    height: 600px;
+    border-radius: 300px;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 200px;
+}
+#quan{
+    width: 510px;
+    height: 510px;
+    border: 2px solid #fff;
+    border-radius: 255px;
+    margin-top: 45px;
+    margin-left: 45px;
+    position: absolute;
+}
+#m_top button{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    position: absolute;
+    font-weight: bold;
+    border: none;
+    color: white;
+    letter-spacing: 5px;
+}
+#selectInformation {
+    margin-left: 250px;
+    margin-top: 0px;
+    background: url("/images/i.jpeg") -7px -7px no-repeat;
+    background-size: 114px 114px;
+}
+#leave{
+    margin-left: 500px;
+    margin-top: 250px;
+    background: url("/images/j.jpg") -7px -7px no-repeat;
+    background-size: 114px 114px;
+}
+#correct{
+    margin-left: 500px;
+    margin-top: 250px;
+    background: url("/images/j.jpg") -7px -7px no-repeat;
+    background-size: 114px 114px;
+}
+#afterleave{
+    margin-left: 250px;
+    margin-top: 500px;
+    background: url("/images/b.jpeg") -7px -7px no-repeat;
+    background-size: 114px 114px;
+}
+#pholidays{
+    margin-left: 0px;
+    margin-top: 250px;
+    background: url("/images/a.jpeg") -7px -7px no-repeat;
+    background-size: 114px 114px;
+}
+#box{
+    width: 900px;
+    height: 700px;
+    position: absolute;
+    z-index: 4;
+    border-radius: 100px;
+    background: url("/images/h.jpeg");
+    margin: 0 50px auto;
+}
+#box_3 input,#box_2 input,#goPH,#insert{
+    width: 46px;
+    height: 25px;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    background: white;
+    text-align: center;
+}
+#box_3 input:hover,#box_2 input:hover,#goPH:hover,#insert:hover{
+    cursor: pointer;
+    background: red;
+    color: white;
+}
+#dd{
+    text-align: center;
+    width: 150px;
+    height: 330px;
+    background: black;
+    border-radius: 50px;
+    color: white;
+    margin-left: 400px;
+    margin-top: -400px;
+}
+#close{
+    font-size: 40px;
+    font-weight: bold;
+    border: none;
+    float: right;
+    margin-top: 40px;
+    margin-right: 50px;
+    background: none;
+    font-weight: bold;
+    color: white;
+}
+#close:hover{
+    cursor: pointer;
+    color: red;
+}
+#box_0{
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 150px;
+    color: black;
+}
+#box_1{
+    position: absolute;
+    width: 200px;
+    margin-top: 70px;
+    margin-left: 330px;
+    color: black;
+}
+#box_1 span{
+    display: block;
+    margin-top: 10px;
+}
+#box_2{
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 40px;
+    color: black;
+}
+#box_3{
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 20px;
+    color: black;
+}
+#box_4{
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 270px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

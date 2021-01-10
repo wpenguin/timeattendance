@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqie.attendance.mapper.DeptMapper">
+  <resultMap id="BaseResultMap" type="com.wqie.attendance.model.Dept">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="DEPTNO" jdbcType="VARCHAR" property="deptno" />
+    <result column="DNAME" jdbcType="VARCHAR" property="dname" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DEPTNO, DNAME, TELEPHONE
+  </sql>
+  <select id="selectMyDept" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_DEPT
+    where DEPTNO = #{deptno,jdbcType=NUMERIC}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_DEPT
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_DEPT
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.wqie.attendance.model.Dept">
+    insert into T_DEPT (ID, DEPTNO, DNAME, 
+      TELEPHONE)
+    values (#{id,jdbcType=NUMERIC}, #{deptno,jdbcType=VARCHAR}, #{dname,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqie.attendance.model.Dept">
+    insert into T_DEPT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="deptno != null">
+        DEPTNO,
+      </if>
+      <if test="dname != null">
+        DNAME,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="deptno != null">
+        #{deptno,jdbcType=VARCHAR},
+      </if>
+      <if test="dname != null">
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqie.attendance.model.Dept">
+    update T_DEPT
+    <set>
+      <if test="deptno != null">
+        DEPTNO = #{deptno,jdbcType=VARCHAR},
+      </if>
+      <if test="dname != null">
+        DNAME = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqie.attendance.model.Dept">
+    update T_DEPT
+    set DEPTNO = #{deptno,jdbcType=VARCHAR},
+      DNAME = #{dname,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

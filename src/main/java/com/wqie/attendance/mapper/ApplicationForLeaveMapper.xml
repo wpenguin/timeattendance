@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqie.attendance.mapper.ApplicationForLeaveMapper">
+  <resultMap id="BaseResultMap" type="com.wqie.attendance.model.ApplicationForLeave">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="APPLICANTEMPNO" jdbcType="VARCHAR" property="applicantempno" />
+    <result column="REASON" jdbcType="VARCHAR" property="reason" />
+    <result column="APPROVEREMPNO" jdbcType="VARCHAR" property="approverempno" />
+    <result column="LEAVETIME" jdbcType="VARCHAR" property="leavetime" />
+    <result column="LEAVEDATE" jdbcType="VARCHAR" property="leavedate" />
+    <result column="LEAVEDATES" jdbcType="NUMERIC" property="leavedates" />
+    <result column="APPROVALTIME" jdbcType="VARCHAR" property="approvaltime" />
+    <result column="STATE" jdbcType="NUMERIC" property="state" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, APPLICANTEMPNO, REASON, APPROVEREMPNO, LEAVETIME, LEAVEDATE, LEAVEDATES, APPROVALTIME, 
+    STATE, TYPE
+  </sql>
+  <update id="updatestate">
+    update T_APPLICATIONFORLEAVE
+    set APPROVALTIME = #{approvaltime,jdbcType=VARCHAR},
+    STATE = #{state,jdbcType=NUMERIC}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <select id="selectAfterLeaves" parameterType="java.lang.String" resultType="com.wqie.attendance.model.ApplicationForLeave">
+    select
+    <include refid="Base_Column_List" />
+    from T_APPLICATIONFORLEAVE
+    where APPROVEREMPNO = #{approverempno,jdbcType=VARCHAR}
+    and state not in (0)
+  </select>
+  <select id="dApplicationForLeave" resultType="com.wqie.attendance.model.ApplicationForLeave">
+    select
+    <include refid="Base_Column_List" />
+    from T_APPLICATIONFORLEAVE
+    where APPROVEREMPNO = #{approverempno,jdbcType=VARCHAR}
+    and STATE = #{state,jdbcType=NUMERIC}
+  </select>
+  <select id="selectMyApplicationForLeave" parameterType="java.lang.String" resultType="com.wqie.attendance.model.ApplicationForLeave">
+    select
+    <include refid="Base_Column_List" />
+    from T_APPLICATIONFORLEAVE
+    where APPLICANTEMPNO = #{applicantempno,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select
+    MAX(ID)
+    from T_APPLICATIONFORLEAVE
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_APPLICATIONFORLEAVE
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_APPLICATIONFORLEAVE
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.wqie.attendance.model.ApplicationForLeave">
+    insert into T_APPLICATIONFORLEAVE (ID, APPLICANTEMPNO, REASON, 
+      APPROVEREMPNO, LEAVETIME, LEAVEDATE, 
+      LEAVEDATES, APPROVALTIME, STATE, 
+      TYPE)
+    values (#{id,jdbcType=NUMERIC}, #{applicantempno,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{approverempno,jdbcType=VARCHAR}, #{leavetime,jdbcType=VARCHAR}, #{leavedate,jdbcType=VARCHAR}, 
+      #{leavedates,jdbcType=NUMERIC}, #{approvaltime,jdbcType=VARCHAR}, #{state,jdbcType=NUMERIC}, 
+      #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqie.attendance.model.ApplicationForLeave">
+    insert into T_APPLICATIONFORLEAVE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applicantempno != null">
+        APPLICANTEMPNO,
+      </if>
+      <if test="reason != null">
+        REASON,
+      </if>
+      <if test="approverempno != null">
+        APPROVEREMPNO,
+      </if>
+      <if test="leavetime != null">
+        LEAVETIME,
+      </if>
+      <if test="leavedate != null">
+        LEAVEDATE,
+      </if>
+      <if test="leavedates != null">
+        LEAVEDATES,
+      </if>
+      <if test="approvaltime != null">
+        APPROVALTIME,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="evidence != null">
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="applicantempno != null">
+        #{applicantempno,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approverempno != null">
+        #{approverempno,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetime != null">
+        #{leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null">
+        #{leavedate,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedates != null">
+        #{leavedates,jdbcType=NUMERIC},
+      </if>
+      <if test="approvaltime != null">
+        #{approvaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=NUMERIC},
+      </if>
+      <if test="evidence != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqie.attendance.model.ApplicationForLeave">
+    update T_APPLICATIONFORLEAVE
+    <set>
+      <if test="applicantempno != null">
+        APPLICANTEMPNO = #{applicantempno,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approverempno != null">
+        APPROVEREMPNO = #{approverempno,jdbcType=VARCHAR},
+      </if>
+      <if test="leavetime != null">
+        LEAVETIME = #{leavetime,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null">
+        LEAVEDATE = #{leavedate,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedates != null">
+        LEAVEDATES = #{leavedates,jdbcType=NUMERIC},
+      </if>
+      <if test="approvaltime != null">
+        APPROVALTIME = #{approvaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=NUMERIC},
+      </if>
+      <if test="evidence != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqie.attendance.model.ApplicationForLeave">
+    update T_APPLICATIONFORLEAVE
+    set APPLICANTEMPNO = #{applicantempno,jdbcType=VARCHAR},
+      REASON = #{reason,jdbcType=VARCHAR},
+      APPROVEREMPNO = #{approverempno,jdbcType=VARCHAR},
+      LEAVETIME = #{leavetime,jdbcType=VARCHAR},
+      LEAVEDATE = #{leavedate,jdbcType=VARCHAR},
+      LEAVEDATES = #{leavedates,jdbcType=NUMERIC},
+      APPROVALTIME = #{approvaltime,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=NUMERIC},
+      TYPE = #{type,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

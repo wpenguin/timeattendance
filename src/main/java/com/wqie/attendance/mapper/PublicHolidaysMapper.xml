@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wqie.attendance.mapper.PublicHolidaysMapper">
+  <resultMap id="BaseResultMap" type="com.wqie.attendance.model.PublicHolidays">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="YEAR" jdbcType="NUMERIC" property="year" />
+    <result column="MONTH" jdbcType="NUMERIC" property="month" />
+    <result column="DAY" jdbcType="NUMERIC" property="day" />
+    <result column="DAYS" jdbcType="NUMERIC" property="days" />
+    <result column="PHNAME" jdbcType="VARCHAR" property="phname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, YEAR, MONTH, DAY, DAYS, PHNAME
+  </sql>
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select
+    MAX(ID)
+    from T_PUBLICHOLIDAYS
+  </select>
+  <select id="selectPHolidays" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_PUBLICHOLIDAYS
+    where YEAR = #{year,jdbcType=NUMERIC}
+    and MONTH = #{month,jdbcType=NUMERIC}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_PUBLICHOLIDAYS
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from T_PUBLICHOLIDAYS
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="com.wqie.attendance.model.PublicHolidays">
+    insert into T_PUBLICHOLIDAYS (ID, YEAR, MONTH, 
+      DAY, DAYS, PHNAME)
+    values (#{id,jdbcType=NUMERIC}, #{year,jdbcType=NUMERIC}, #{month,jdbcType=NUMERIC}, 
+      #{day,jdbcType=NUMERIC}, #{days,jdbcType=NUMERIC}, #{phname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wqie.attendance.model.PublicHolidays">
+    insert into T_PUBLICHOLIDAYS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="year != null">
+        YEAR,
+      </if>
+      <if test="month != null">
+        MONTH,
+      </if>
+      <if test="day != null">
+        DAY,
+      </if>
+      <if test="days != null">
+        DAYS,
+      </if>
+      <if test="phname != null">
+        PHNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=NUMERIC},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=NUMERIC},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=NUMERIC},
+      </if>
+      <if test="days != null">
+        #{days,jdbcType=NUMERIC},
+      </if>
+      <if test="phname != null">
+        #{phname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wqie.attendance.model.PublicHolidays">
+    update T_PUBLICHOLIDAYS
+    <set>
+      <if test="year != null">
+        YEAR = #{year,jdbcType=NUMERIC},
+      </if>
+      <if test="month != null">
+        MONTH = #{month,jdbcType=NUMERIC},
+      </if>
+      <if test="day != null">
+        DAY = #{day,jdbcType=NUMERIC},
+      </if>
+      <if test="days != null">
+        DAYS = #{days,jdbcType=NUMERIC},
+      </if>
+      <if test="phname != null">
+        PHNAME = #{phname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wqie.attendance.model.PublicHolidays">
+    update T_PUBLICHOLIDAYS
+    set YEAR = #{year,jdbcType=NUMERIC},
+      MONTH = #{month,jdbcType=NUMERIC},
+      DAY = #{day,jdbcType=NUMERIC},
+      DAYS = #{days,jdbcType=NUMERIC},
+      PHNAME = #{phname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>
